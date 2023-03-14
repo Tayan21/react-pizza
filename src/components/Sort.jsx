@@ -3,7 +3,9 @@ import React from "react";
 export const Sort = ({value, onChangeSort}) => {
   const [open, setOpen] = React.useState(false);
   
-  const list = ["популярности", "цене", "алфавиту"];
+  const list = [
+    {name: "популярности", sort: "rating"},
+    {name: "цене", } , "алфавиту"];
   const sortName = list[value]
 
   const onClickListItem = (i) => {
