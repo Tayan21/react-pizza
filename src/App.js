@@ -6,6 +6,8 @@ import { Home } from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import { NotFound } from "./pages/NotFound";
 import { Cart } from "./pages/Cart";
+import { useSelector, useDispatch } from "react-redux";
+import { decrement, increment } from "./components/Redux/slices/filterSlice";
 
 export const searchContext = React.createContext("");
 
@@ -14,7 +16,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      <searchContext.Provider value={{searchValue, setSearchValue}}>
+      <searchContext.Provider value={{ searchValue, setSearchValue }}>
         <Header />
         <div className="content">
           <Routes>
