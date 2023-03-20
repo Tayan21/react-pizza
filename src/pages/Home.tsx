@@ -14,22 +14,26 @@ import {
 } from "../components/Redux/slices/filterSlice";
 import { useNavigate, Link } from "react-router-dom";
 import qs from "qs";
-import { fetchPizzas, selectPizzaData } from "../components/Redux/slices/pizzaSlice";
+import {
+  fetchPizzas,
+  selectPizzaData,
+} from "../components/Redux/slices/pizzaSlice";
 
-export const Home = () => {
-  const {categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
-  console.log(sort)
+export const Home: React.FC = () => {
+  const { categoryId, sort, currentPage, searchValue } =
+    useSelector(selectFilter);
+  console.log(sort);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
   const { items, status } = useSelector(selectPizzaData);
 
-  const onChangeCategory = (id) => {
-    dispatch(setCategoryId(id));
+  const onChangeCategory = (index: number) => {
+    dispatch(setCategoryId(index));
   };
 
-  const onChangePage = (number) => {
+  const onChangePage = (number: Number) => {
     dispatch(setCurrentPage(number));
   };
 
@@ -39,7 +43,11 @@ export const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
 
-    dispatch(fetchPizzas({ sortBy, order, category, search, currentPage }));
+    dispatch(
+      //@ts-ignore
+      fetchPizzas({ 
+        sortBy, order, category, search, currentPage 
+      }));
 
     window.scrollTo(0, 0);
   };
@@ -82,7 +90,11 @@ export const Home = () => {
     getPizzas();
   }, [categoryId, sort, searchValue, currentPage]);
 
-  const pizzas = items.map((obj) => <Link key={obj.title} to={`/pizza/${obj.id}`}><PizzaBlock  {...obj} /></Link>);
+  const pizzas = items.map((obj: any) => (
+    <Link key={obj.title} to={`/pizza/${obj.id}`}>
+      <PizzaBlock {...obj} />
+    </Link>
+  ));
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
@@ -93,7 +105,7 @@ export const Home = () => {
       <div className="content__top">
         <Categories
           value={categoryId}
-          onClickCategory={(id) => onChangeCategory(id)}
+          onClickCategory={(id: number) => onChangeCategory(id)}
         />
         <Sort />
       </div>
