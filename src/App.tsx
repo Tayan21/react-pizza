@@ -4,9 +4,14 @@ import "./scss/app.scss";
 import { Home } from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import { NotFound } from "./pages/NotFound";
-import { Cart } from "./pages/Cart";
 import { FullPizza } from "./pages/FullPizza";
 import { MainLayout } from "./layouts/MainLayout";
+import loadable from 'react-loadable'
+
+const Cart = loadable({
+  loader: () => import(/* webpackCHunkName: "Cart" */'./pages/Cart'),
+  loading: () => <div>Loading ...</div>
+})
 
 const App: React.FC = () => {
   return (

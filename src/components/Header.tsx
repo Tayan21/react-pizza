@@ -8,6 +8,15 @@ import { Search } from "./Search/Search";
 export const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
   const location = useLocation();
+  const isMounted = React.useRef(false)
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items)
+      localStorage.setItem('cart', json)
+    }
+    isMounted.current = true
+  }, [items])
 
   const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
 
@@ -23,7 +32,7 @@ export const Header: React.FC = () => {
             </div>
           </div>
         </Link>
-        <Search />
+        {location.pathname !== "/cart" && <Search />}
         {location.pathname !== "/cart" && (
           <div className="header__cart">
             <Link to="/cart" className="button button--cart">
