@@ -2,7 +2,7 @@
   "name": "react-pizza",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tayan21.github.io/react-pizza/",
+  "homepage": "https://tayan21.github.io/react-pizza",
   "dependencies": {
     "@loadable/component": "^5.15.3",
     "@reduxjs/toolkit": "^1.9.3",
